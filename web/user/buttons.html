@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <title> - Buttons - </title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body id="page-top" onload="initData()">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="adminServlet?tag=show">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3"> Admin <sup>2</sup></div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="adminServlet?tag=show">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>仪表盘</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            界面
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+            <a aria-controls="collapseTwo" aria-expanded="true" class="nav-link" data-target="#collapseTwo"
+               data-toggle="collapse"
+               href="#">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>管理</span>
+            </a>
+            <div aria-labelledby="headingTwo" class="collapse show" data-parent="#accordionSidebar"
+                 id="collapseTwo">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">信息查询:</h6>
+                    <a class="collapse-item active" href="adminServlet?tag=tableAdd">信息处理</a>
+                    <!--                    <a class="collapse-item" href="adminServlet?tag=cards">聚合查询</a>-->
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <!--            <li class="nav-item">-->
+        <!--                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"-->
+        <!--                    aria-expanded="true" aria-controls="collapseUtilities">-->
+        <!--                    <i class="fas fa-fw fa-wrench"></i>-->
+        <!--                    <span>Utilities</span>-->
+        <!--                </a>-->
+        <!--                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"-->
+        <!--                    data-parent="#accordionSidebar">-->
+        <!--                    <div class="bg-white py-2 collapse-inner rounded">-->
+        <!--                        <h6 class="collapse-header">Custom Utilities:</h6>-->
+        <!--                        <a class="collapse-item" href="utilities-color.html">Colors</a>-->
+        <!--                        <a class="collapse-item" href="utilities-border.html">Borders</a>-->
+        <!--                        <a class="collapse-item" href="utilities-animation.html">Animations</a>-->
+        <!--                        <a class="collapse-item" href="utilities-other.html">Other</a>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </li>-->
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            显示
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <!--            <li class="nav-item">-->
+        <!--                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"-->
+        <!--                    aria-expanded="true" aria-controls="collapsePages">-->
+        <!--                    <i class="fas fa-fw fa-folder"></i>-->
+        <!--                    <span>Pages</span>-->
+        <!--                </a>-->
+        <!--                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">-->
+        <!--                    <div class="bg-white py-2 collapse-inner rounded">-->
+        <!--                        <h6 class="collapse-header">Login Screens:</h6>-->
+        <!--                        <a class="collapse-item" href="login.html">Login</a>-->
+        <!--                        <a class="collapse-item" href="register.html">Register</a>-->
+        <!--                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>-->
+        <!--                        <div class="collapse-divider"></div>-->
+        <!--                        <h6 class="collapse-header">Other Pages:</h6>-->
+        <!--                        <a class="collapse-item" href="404.html">404 Page</a>-->
+        <!--                        <a class="collapse-item" href="blank.html">Blank Page</a>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </li>-->
+
+        <!-- Nav Item - Charts -->
+        <!--        <li class="nav-item">-->
+        <!--            <a class="nav-link" href="adminServlet?tag=charts">-->
+        <!--                <i class="fas fa-fw fa-chart-area"></i>-->
+        <!--                <span>数据</span></a>-->
+        <!--        </li>-->
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="adminServlet?tag=tables">
+                <i class="fas fa-fw fa-table"></i>
+                <span>表格</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div class="d-flex flex-column" id="content-wrapper">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Search -->
+                <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <!--                    <div class="input-group">-->
+                    <!--                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."-->
+                    <!--                               aria-label="Search" aria-describedby="basic-addon2">-->
+                    <!--                        <div class="input-group-append">-->
+                    <!--                            <button class="btn btn-primary" type="button">-->
+                    <!--                                <i class="fas fa-search fa-sm"></i>-->
+                    <!--                            </button>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                </form>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
+                           href="#" id="searchDropdown" role="button">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div aria-labelledby="searchDropdown"
+                             class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input aria-describedby="basic-addon2" aria-label="Search"
+                                           class="form-control bg-light border-0 small" placeholder="Search for..."
+                                           type="text">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!--                        &lt;!&ndash; Nav Item - Alerts &ndash;&gt;-->
+                    <!--                        <li class="nav-item dropdown no-arrow mx-1">-->
+                    <!--                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"-->
+                    <!--                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                    <!--                                <i class="fas fa-bell fa-fw"></i>-->
+                    <!--                                &lt;!&ndash; Counter - Alerts &ndash;&gt;-->
+                    <!--                                <span class="badge badge-danger badge-counter">3+</span>-->
+                    <!--                            </a>-->
+                    <!--                            &lt;!&ndash; Dropdown - Alerts &ndash;&gt;-->
+                    <!--                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in"-->
+                    <!--                                aria-labelledby="alertsDropdown">-->
+                    <!--                                <h6 class="dropdown-header">-->
+                    <!--                                    Alerts Center-->
+                    <!--                                </h6>-->
+                    <!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
+                    <!--                                    <div class="mr-3">-->
+                    <!--                                        <div class="icon-circle bg-primary">-->
+                    <!--                                            <i class="fas fa-file-alt text-white"></i>-->
+                    <!--                                        </div>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div>-->
+                    <!--                                        <div class="small text-gray-500">December 12, 2019</div>-->
+                    <!--                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>-->
+                    <!--                                    </div>-->
+                    <!--                                </a>-->
+                    <!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
+                    <!--                                    <div class="mr-3">-->
+                    <!--                                        <div class="icon-circle bg-success">-->
+                    <!--                                            <i class="fas fa-donate text-white"></i>-->
+                    <!--                                        </div>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div>-->
+                    <!--                                        <div class="small text-gray-500">December 7, 2019</div>-->
+                    <!--                                        $290.29 has been deposited into your account!-->
+                    <!--                                    </div>-->
+                    <!--                                </a>-->
+                    <!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
+                    <!--                                    <div class="mr-3">-->
+                    <!--                                        <div class="icon-circle bg-warning">-->
+                    <!--                                            <i class="fas fa-exclamation-triangle text-white"></i>-->
+                    <!--                                        </div>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div>-->
+                    <!--                                        <div class="small text-gray-500">December 2, 2019</div>-->
+                    <!--                                        Spending Alert: We've noticed unusually high spending for your account.-->
+                    <!--                                    </div>-->
+                    <!--                                </a>-->
+                    <!--                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>-->
+                    <!--                            </div>-->
+                    <!--                        </li>-->
+
+                    <!--                        &lt;!&ndash; Nav Item - Messages &ndash;&gt;-->
+                    <!--                        <li class="nav-item dropdown no-arrow mx-1">-->
+                    <!--                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"-->
+                    <!--                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                    <!--                                <i class="fas fa-envelope fa-fw"></i>-->
+                    <!--                                &lt;!&ndash; Counter - Messages &ndash;&gt;-->
+                    <!--                                <span class="badge badge-danger badge-counter">7</span>-->
+                    <!--                            </a>-->
+                    <!--                            &lt;!&ndash; Dropdown - Messages &ndash;&gt;-->
+                    <!--                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in"-->
+                    <!--                                aria-labelledby="messagesDropdown">-->
+                    <!--                                <h6 class="dropdown-header">-->
+                    <!--                                    Message Center-->
+                    <!--                                </h6>-->
+                    <!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
+                    <!--                                    <div class="dropdown-list-image mr-3">-->
+                    <!--                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"-->
+                    <!--                                            alt="...">-->
+                    <!--                                        <div class="status-indicator bg-success"></div>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div class="font-weight-bold">-->
+                    <!--                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a-->
+                    <!--                                            problem I've been having.</div>-->
+                    <!--                                        <div class="small text-gray-500">Emily Fowler · 58m</div>-->
+                    <!--                                    </div>-->
+                    <!--                                </a>-->
+                    <!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
+                    <!--                                    <div class="dropdown-list-image mr-3">-->
+                    <!--                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"-->
+                    <!--                                            alt="...">-->
+                    <!--                                        <div class="status-indicator"></div>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div>-->
+                    <!--                                        <div class="text-truncate">I have the photos that you ordered last month, how-->
+                    <!--                                            would you like them sent to you?</div>-->
+                    <!--                                        <div class="small text-gray-500">Jae Chun · 1d</div>-->
+                    <!--                                    </div>-->
+                    <!--                                </a>-->
+                    <!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
+                    <!--                                    <div class="dropdown-list-image mr-3">-->
+                    <!--                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"-->
+                    <!--                                            alt="...">-->
+                    <!--                                        <div class="status-indicator bg-warning"></div>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div>-->
+                    <!--                                        <div class="text-truncate">Last month's report looks great, I am very happy with-->
+                    <!--                                            the progress so far, keep up the good work!</div>-->
+                    <!--                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>-->
+                    <!--                                    </div>-->
+                    <!--                                </a>-->
+                    <!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
+                    <!--                                    <div class="dropdown-list-image mr-3">-->
+                    <!--                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"-->
+                    <!--                                            alt="...">-->
+                    <!--                                        <div class="status-indicator bg-success"></div>-->
+                    <!--                                    </div>-->
+                    <!--                                    <div>-->
+                    <!--                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone-->
+                    <!--                                            told me that people say this to all dogs, even if they aren't good...</div>-->
+                    <!--                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>-->
+                    <!--                                    </div>-->
+                    <!--                                </a>-->
+                    <!--                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>-->
+                    <!--                            </div>-->
+                    <!--                        </li>-->
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
+                           href="#" id="userDropdown" role="button">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="userName"></span>
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div aria-labelledby="userDropdown"
+                             class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                            <a class="dropdown-item" href="#" id="fileAvatar" onclick="return fileAvatar()">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                头像
+                            </a>
+                            <form action="fileUploadServlet" enctype="multipart/form-data" id="fileUploadTable"
+                                  method="post" style="display:none;">
+                                <input name="fileType" type="file"></input>
+                                <a class="dropdown-item" href="#" onclick="fileUploadTable.submit()">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    上传
+                                </a>
+                            </form>
+                            <a class="dropdown-item" href="adminServlet?tag=tableAdd">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                设置
+                            </a>
+                            <!--                            <a class="dropdown-item" href="#">-->
+                            <!--                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>-->
+                            <!--                                Activity Log-->
+                            <!--                            </a>-->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" data-target="#logoutModal" data-toggle="modal" href="#">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                退出
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800">信息添加</h1>
+
+                <div class="row">
+
+                    <div class="col-lg-6">
+
+                        <!-- Circle Buttons -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">信息请求添加</h6>
+                            </div>
+                            <div class="card-body">
+                                <!--                                    <p>Use Font Awesome Icons (included with this theme package) along with the circle-->
+                                <!--                                        buttons as shown in the examples below!</p>-->
+                                <!--                                    &lt;!&ndash; Circle Buttons (Default) &ndash;&gt;-->
+                                <!--                                    <div class="mb-2">-->
+                                <!--                                        <code>.btn-circle</code>-->
+                                <!--                                    </div>-->
+                                <!--                                    <a href="#" class="btn btn-primary btn-circle">-->
+                                <!--                                        <i class="fab fa-facebook-f"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-success btn-circle">-->
+                                <!--                                        <i class="fas fa-check"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-info btn-circle">-->
+                                <!--                                        <i class="fas fa-info-circle"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-warning btn-circle">-->
+                                <!--                                        <i class="fas fa-exclamation-triangle"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-danger btn-circle">-->
+                                <!--                                        <i class="fas fa-trash"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    &lt;!&ndash; Circle Buttons (Small) &ndash;&gt;-->
+                                <!--                                    <div class="mt-4 mb-2">-->
+                                <!--                                        <code>.btn-circle .btn-sm</code>-->
+                                <!--                                    </div>-->
+                                <!--                                    <a href="#" class="btn btn-primary btn-circle btn-sm">-->
+                                <!--                                        <i class="fab fa-facebook-f"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-success btn-circle btn-sm">-->
+                                <!--                                        <i class="fas fa-check"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-info btn-circle btn-sm">-->
+                                <!--                                        <i class="fas fa-info-circle"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-warning btn-circle btn-sm">-->
+                                <!--                                        <i class="fas fa-exclamation-triangle"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-danger btn-circle btn-sm">-->
+                                <!--                                        <i class="fas fa-trash"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    &lt;!&ndash; Circle Buttons (Large) &ndash;&gt;-->
+                                <!--                                    <div class="mt-4 mb-2">-->
+                                <!--                                        <code>.btn-circle .btn-lg</code>-->
+                                <!--                                    </div>-->
+                                <!--                                    <a href="#" class="btn btn-primary btn-circle btn-lg">-->
+                                <!--                                        <i class="fab fa-facebook-f"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-success btn-circle btn-lg">-->
+                                <!--                                        <i class="fas fa-check"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-info btn-circle btn-lg">-->
+                                <!--                                        <i class="fas fa-info-circle"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-warning btn-circle btn-lg">-->
+                                <!--                                        <i class="fas fa-exclamation-triangle"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <a href="#" class="btn btn-danger btn-circle btn-lg">-->
+                                <!--                                        <i class="fas fa-trash"></i>-->
+                                <!--                                    </a>-->
+                                <form action="adminServlet?tag=addStudent" class="form-horizontal" id="addFormTable"
+                                      method="post">
+                                    <table class="table table table-striped" id="dataTable">
+                                        <tr>
+                                            <td>姓名:</td>
+                                            <td><input name="studentName" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>密码:</td>
+                                            <td><input name="studentPwd" type="text"></td>
+                                        </tr>
+                                        <tr id="sexByStudent">
+                                        </tr>
+                                        <tr id="gradeByStudent">
+                                        </tr>
+                                        <tr>
+                                            <td>联系电话:</td>
+                                            <td><input name="studentPhone" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>地址:</td>
+                                            <td><input name="studentAddress" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>生日:</td>
+                                            <td><input name="studentBornDate" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>电子邮箱:</td>
+                                            <td><input name="studentEmail" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>身份证号:</td>
+                                            <td><input name="studentIdentityCard" type="text"></td>
+                                        </tr>
+                                    </table>
+                                    <a class="btn btn-primary btn-icon-split btn-lg" href="#"
+                                       onclick="addFormTable.submit()">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                                        <span class="text">添加数据</span>
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Brand Buttons -->
+                        <!--                        <div class="card shadow mb-4">-->
+                        <!--                            <div class="card-header py-3">-->
+                        <!--                                <h6 class="m-0 font-weight-bold text-primary">Brand Buttons</h6>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="card-body">-->
+                        <!--                                <p>Google and Facebook buttons are available featuring each company's respective-->
+                        <!--                                    brand color. They are used on the user login and registration pages.</p>-->
+                        <!--                                <p>You can create more custom buttons by adding a new color variable in the-->
+                        <!--                                    <code>_variables.scss</code> file and then using the Bootstrap button variant-->
+                        <!--                                    mixin to create a new style, as demonstrated in the <code>_buttons.scss</code>-->
+                        <!--                                    file.</p>-->
+                        <!--                                <a href="#" class="btn btn-google btn-block"><i class="fab fa-google fa-fw"></i>-->
+                        <!--                                    .btn-google</a>-->
+                        <!--                                <a href="#" class="btn btn-facebook btn-block"><i-->
+                        <!--                                        class="fab fa-facebook-f fa-fw"></i> .btn-facebook</a>-->
+
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">学生成绩修改</h6>
+                            </div>
+                            <div class="card-body">
+                                <!--                                <p>Works with any button colors, just use the <code>.btn-icon-split</code> class and-->
+                                <!--                                    the markup in the examples below. The examples below also use the-->
+                                <!--                                    <code>.text-white-50</code> helper class on the icons for additional styling,-->
+                                <!--                                    but it is not required.</p>-->
+                                <!--                                <a href="#" class="btn btn-primary btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-flag"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Primary</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-success btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-check"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Success</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-info btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-info-circle"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Info</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-warning btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-exclamation-triangle"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Warning</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-danger btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-trash"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Danger</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-secondary btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-arrow-right"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Secondary</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-light btn-icon-split">-->
+                                <!--                                        <span class="icon text-gray-600">-->
+                                <!--                                            <i class="fas fa-arrow-right"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Light</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="mb-4"></div>-->
+                                <!--                                <p>Also works with small and large button classes!</p>-->
+                                <!--                                <a href="#" class="btn btn-primary btn-icon-split btn-sm">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-flag"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Small</span>-->
+                                <!--                                </a>-->
+                                <div class="my-2"></div>
+                                <form action="adminServlet?tag=updateStudentResult" class="form-horizontal"
+                                      id="gradeRevisionEdit" method="post">
+                                    <table class="table table table-striped" id="gradeRevisionEditTable">
+                                        <tr>
+                                            <td>请输入学号:</td>
+                                            <td><input id="studentNo" name="studentNoWow"
+                                                       onblur="gradeRevision()" type="text">
+                                                <span id="spanStudent"
+                                                      style="font-size:10px;margin-left: 40px; display:none"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                <a class="btn btn-primary btn-icon-split btn-lg" href="#"
+                                   onclick="gradeRevisionEdit.submit()">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                                    <span class="text">修改成绩</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">管理员密码处理</h6>
+                            </div>
+                            <div class="card-body">
+                                <!--                                <p>Works with any button colors, just use the <code>.btn-icon-split</code> class and-->
+                                <!--                                    the markup in the examples below. The examples below also use the-->
+                                <!--                                    <code>.text-white-50</code> helper class on the icons for additional styling,-->
+                                <!--                                    but it is not required.</p>-->
+                                <!--                                <a href="#" class="btn btn-primary btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-flag"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Primary</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-success btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-check"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Success</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-info btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-info-circle"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Info</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-warning btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-exclamation-triangle"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Warning</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-danger btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-trash"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Danger</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-secondary btn-icon-split">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-arrow-right"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Secondary</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="my-2"></div>-->
+                                <!--                                <a href="#" class="btn btn-light btn-icon-split">-->
+                                <!--                                        <span class="icon text-gray-600">-->
+                                <!--                                            <i class="fas fa-arrow-right"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Light</span>-->
+                                <!--                                </a>-->
+                                <!--                                <div class="mb-4"></div>-->
+                                <!--                                <p>Also works with small and large button classes!</p>-->
+                                <!--                                <a href="#" class="btn btn-primary btn-icon-split btn-sm">-->
+                                <!--                                        <span class="icon text-white-50">-->
+                                <!--                                            <i class="fas fa-flag"></i>-->
+                                <!--                                        </span>-->
+                                <!--                                    <span class="text">Split Button Small</span>-->
+                                <!--                                </a>-->
+                                <div class="my-2"></div>
+                                <form action="adminServlet?tag=updateAdminPassword" class="form-horizontal"
+                                      id="addFormTablePwd"
+                                      method="post">
+                                    <table class="table table table-striped" id="dataTablePwd">
+                                        <tr>
+                                            <td>老密码:</td>
+                                            <td><input id="oldPassword" name="password" onblur="passwordSelect()"
+                                                       type="text">
+                                                <span id="span"
+                                                      style="font-size:10px;margin-left: 40px; display:none"></span>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>新密码:</td>
+                                            <td><input class="displayNone" id="exampleInputPassword" name="newPassword"
+                                                       onblur="userPwdVerify();" type="password">
+                                                <span id="spanPwd"
+                                                      style="font-size:10px;margin-left: 40px; display:none"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>确认密码:</td>
+                                            <td><input class="displayNone" id="exampleRepeatPassword" name="rePassword"
+                                                       onblur="userPwdVerify();" type="password"></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                <a class="btn btn-primary btn-icon-split btn-lg" href="#"
+                                   id="buttonPassword" onclick="addFormTablePwd.submit()">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                                    <span class="text">修改密码</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2022</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="logoutModal" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">准备退出了吗?</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">如果您准备好结束当前会话，请选择下面的“退出”。</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">取消</button>
+                <a class="btn btn-primary" href="adminServlet?tag=logout">退出</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+</body>
+<script>
+    var booleanOld = false;
+    var boolPwd = false;
+    $(function () {
+        $(".displayNone").css({"pointer-events": "none"});
+        $("#buttonPassword").css({"pointer-events": "none"});
+    });
+
+    function userPwdVerify() {
+        var pwd = $("#exampleInputPassword").val();
+        var pwds = $("#exampleRepeatPassword").val();
+        if ((pwd == "" || pwd == null) || (pwds == "" || pwds == null)) {
+            boolPwd = false;
+            $("#spanPwd").hide(100);
+        } else if (pwd == pwds) {
+            $("#spanPwd").show(100).html("密码可以使用!");
+            boolPwd = true;
+            resetButton();
+        } else {
+            $("#spanPwd").show(100).html("两次密码输入不一致！");
+            boolPwd = false;
+        }
+    }
+
+    function resetButton() {
+        if (booleanOld == true && boolPwd == true) {
+            $("#buttonPassword").css({"pointer-events": "auto"});
+        } else {
+            $("#buttonPassword").css({"pointer-events": "none"});
+        }
+    }
+
+
+    function passwordSelect() {
+        var oldPassword = $("#oldPassword").val();
+        $.get("adminServlet", {tag: "passwordSelect", oldPassword: oldPassword},
+            function (data) {
+                if (oldPassword == null || oldPassword == "") {
+                    $("#span").hide(100);
+                } else if (data == "true") {
+                    $("#span").show(100).html("旧密码正确可以更改密码！");
+                    booleanOld = true;
+                    unlockNewPassword();
+                } else {
+                    $("#span").show(100).html("旧密码错误不可以更改密码！");
+                    booleanOld = false;
+                    unlockNewPassword();
+                }
+            });
+    }
+
+    function unlockNewPassword() {
+        if (booleanOld) {
+            $(".displayNone").css({"pointer-events": "auto"});
+        } else {
+            $(".displayNone").css({"pointer-events": "none"});
+        }
+
+    }
+
+
+    function initData() {
+        $.getJSON("adminServlet", {tag: "selectGradeAndSex"},
+            function (json) {
+                var sexByStudent = $("#sexByStudent");
+                var gradeByStudent = $("#gradeByStudent");
+                var str = "";
+
+                if (json.sexName == "男") {
+                    str += "<td>性别:</td>";
+                    str += "<td>"
+                    str += "<input type='radio' name='sex' value='男' checked>男";
+                    str += "<input type='radio' name='sex' value='女'>女";
+                    str += "</td>"
+                } else {
+                    str += "<td>性别:</td>";
+                    str += "<td>"
+                    str += "<input type='radio' name='sex' value='男'>男";
+                    str += "<input type='radio' name='sex' value='女' checked>女";
+                    str += "</td>"
+                }
+                sexByStudent.html(str);
+
+                str = "";
+                str += "<td>年级:</td>"
+                str += "<td>"
+                str += "<select name='grade'>"
+                for (var i = 0; i < json.grade.length; i++) {
+                    if (json.grade[i].gradeId == json.statsMax.gradeId) {
+                        str += "<option value='" + json.grade[i].gradeId + "' selected>" + json.grade[i].gradeName + "</option>";
+                    } else {
+                        str += "<option value='" + json.grade[i].gradeId + "'>" + json.grade[i].gradeName + "</option>";
+                    }
+                }
+                str += "</select>"
+                gradeByStudent.html(str);
+            });
+
+
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        $.getJSON("adminServlet", {tag: "cookie"},
+            function (data) {
+                $("#userName").html(data.Admin.userName);
+                $("#userDropdown").append("<img class='img-profile rounded-circle' src='" + data.avatar + "'>");
+            });
+    });
+
+    function fileAvatar() {
+        $("#fileUploadTable").toggle(function () {
+            $("#fileUploadTable").show();
+        });
+        return false;
+    }
+
+
+    function gradeRevision() {
+        var studentNoSelect = $("#studentNo").val();
+        var gradeRevisionEditTable = $("#gradeRevisionEditTable");
+        if (studentNoSelect == null || studentNoSelect == "") {
+            $("#spanStudent").hide(100);
+            $("#gradeRevisionEditTable tr:gt(0)").remove();
+        } else {
+            $.get("adminServlet", {tag: "studentNoSelect", studentNoSelect: studentNoSelect},
+                function (data) {
+                    console.log(data);
+                    if (data == "true" || data == true) {
+                        $("#spanStudent").show(100).html("");
+                        $.getJSON("adminServlet", {tag: "loadGradesAndCourses", studentNoSelect: studentNoSelect},
+                            function (json) {
+                                var str = "";
+                                $("#gradeRevisionEditTable tr:gt(0)").remove();
+                                str += "<tr>";
+                                str += "<td>学生姓名:</td>"
+                                str += "<td><input name='studentNameOld' type='text' value='"+json.studentName+"' readonly></td>";
+                                str += "</tr>";
+                                for (var i = 0; i < json.loadGradesAndCourses.length; i++) {
+                                    str += "<tr>";
+                                    str += "<td>"+json.loadGradesAndCourses[i].key+":</td>"
+                                    str += "<td><input name='studentScore"+i+"' type='text' value='"+json.loadGradesAndCourses[i].value+"'></td>";
+                                    str += "</tr>";
+                                }
+                                gradeRevisionEditTable.append(str);
+                            });
+                    } else {
+                        $("#spanStudent").show(100).html("未查询到学生！");
+                        $("#gradeRevisionEditTable tr:gt(0)").remove();
+                    }
+                });
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <title> - Dashboard - </title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="js/echarts.min.js"></script>
+    <style>
+        #chart-container {
+            position: relative;
+            height: 30vh;
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="adminServlet?tag=show">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3"> Admin <sup>2</sup></div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="adminServlet?tag=show">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>仪表盘</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            界面
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a aria-controls="collapseTwo" aria-expanded="true" class="nav-link collapsed" data-target="#collapseTwo"
+               data-toggle="collapse" href="#">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>管理</span>
+            </a>
+            <div aria-labelledby="headingTwo" class="collapse" data-parent="#accordionSidebar" id="collapseTwo">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">信息操作:</h6>
+                    <a class="collapse-item" href="adminServlet?tag=tableAdd">信息处理</a>
+                    <!--                    <a class="collapse-item" href="adminServlet?tag=cards">聚合查询</a>-->
+                </div>
+            </div>
+        </li>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            显示
+        </div>
+
+        <!-- Nav Item - Charts -->
+        <!--        <li class="nav-item">-->
+        <!--            <a class="nav-link" href="adminServlet?tag=charts">-->
+        <!--                <i class="fas fa-fw fa-chart-area"></i>-->
+        <!--                <span>数据</span></a>-->
+        <!--        </li>-->
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="adminServlet?tag=tables">
+                <i class="fas fa-fw fa-table"></i>
+                <span>表格</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div class="d-flex flex-column" id="content-wrapper">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Search -->
+                <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <!--                    <div class="input-group">-->
+                    <!--                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."-->
+                    <!--                               aria-label="Search" aria-describedby="basic-addon2">-->
+                    <!--                        <div class="input-group-append">-->
+                    <!--                            <button class="btn btn-primary" type="button">-->
+                    <!--                                <i class="fas fa-search fa-sm"></i>-->
+                    <!--                            </button>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                </form>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
+                           href="#" id="searchDropdown" role="button">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div aria-labelledby="searchDropdown"
+                             class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input aria-describedby="basic-addon2" aria-label="Search"
+                                           class="form-control bg-light border-0 small" placeholder="Search for..."
+                                           type="text">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <!--                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"-->
+                        <!--                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                        <!--                            <i class="fas fa-bell fa-fw"></i>-->
+                        <!--                            &lt;!&ndash; Counter - Alerts &ndash;&gt;-->
+                        <!--                            <span class="badge badge-danger badge-counter">3+</span>-->
+                        <!--                        </a>-->
+                        <!-- Dropdown - Alerts -->
+                        <div aria-labelledby="alertsDropdown"
+                             class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                            <h6 class="dropdown-header">
+                                Alerts Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 12, 2019</div>
+                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 7, 2019</div>
+                                    $290.29 has been deposited into your account!
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-warning">
+                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 2, 2019</div>
+                                    Spending Alert: We've noticed unusually high spending for your account.
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Messages -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <!--                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"-->
+                        <!--                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                        <!--                            <i class="fas fa-envelope fa-fw"></i>-->
+                        <!--                            &lt;!&ndash; Counter - Messages &ndash;&gt;-->
+                        <!--                            <span class="badge badge-danger badge-counter">7</span>-->
+                        <!--                        </a>-->
+                        <!-- Dropdown - Messages -->
+                        <div aria-labelledby="messagesDropdown"
+                             class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                            <h6 class="dropdown-header">
+                                Message Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img alt="..." class="rounded-circle"
+                                         src="img/undraw_profile_1.svg">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                        problem I've been having.
+                                    </div>
+                                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img alt="..." class="rounded-circle"
+                                         src="img/undraw_profile_2.svg">
+                                    <div class="status-indicator"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">I have the photos that you ordered last month, how
+                                        would you like them sent to you?
+                                    </div>
+                                    <div class="small text-gray-500">Jae Chun · 1d</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img alt="..." class="rounded-circle"
+                                         src="img/undraw_profile_3.svg">
+                                    <div class="status-indicator bg-warning"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">Last month's report looks great, I am very happy with
+                                        the progress so far, keep up the good work!
+                                    </div>
+                                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img alt="..." class="rounded-circle"
+                                         src="https://source.unsplash.com/Mv9hjnEUHR4/60x60">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                        told me that people say this to all dogs, even if they aren't good...
+                                    </div>
+                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                        </div>
+                    </li>
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
+                           href="#" id="userDropdown" role="button">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="userName"></span>
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div aria-labelledby="userDropdown"
+                             class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                            <a class="dropdown-item" href="#" id="fileAvatar" onclick="return fileAvatar()">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                头像
+                            </a>
+                            <form action="fileUploadServlet" enctype="multipart/form-data" id="fileUploadTable"
+                                  method="post" style="display:none;">
+                                <input name="fileType" type="file"></input>
+                                <a class="dropdown-item" href="#" onclick="fileUploadTable.submit()">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    上传
+                                </a>
+                            </form>
+                            <a class="dropdown-item" href="adminServlet?tag=tableAdd">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                设置
+                            </a>
+                            <!--                            <a class="dropdown-item" href="#">-->
+                            <!--                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>-->
+                            <!--                                Activity Log-->
+                            <!--                            </a>-->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" data-target="#logoutModal" data-toggle="modal" href="#">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                退出
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">信息阅览</h1>
+                    <!--                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i-->
+                    <!--                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            课程数
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"
+                                             id="getTheTotalNumberOfCourses"></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            学生总数
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="countStudent"></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">考试及格率
+                                        </div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
+                                                     id="getStudentExamPassRates"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="progress progress-sm mr-2" id="getStudentExamPassRatesTwo">
+                                                    <!--                                                    <div class="progress-bar bg-info" role="progressbar"-->
+                                                    <!--                                                         style="width: 70%" aria-valuenow="50" aria-valuemin="0"-->
+                                                    <!--                                                         aria-valuemax="100"></div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending Requests Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            男女比例
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"
+                                             id="getTheRatioOfMaleToFemaleValue"></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">成绩走向</h6>
+                                <!--                                <div class="dropdown no-arrow">-->
+                                <!--                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
+                                <!--                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <div class="dropdown-menu dropdown-menu-right shadow animated&#45;&#45;fade-in"-->
+                                <!--                                         aria-labelledby="dropdownMenuLink">-->
+                                <!--                                        <div class="dropdown-header">Dropdown Header:</div>-->
+                                <!--                                        <a class="dropdown-item" href="#">Action</a>-->
+                                <!--                                        <a class="dropdown-item" href="#">Another action</a>-->
+                                <!--                                        <div class="dropdown-divider"></div>-->
+                                <!--                                        <a class="dropdown-item" href="#">Something else here</a>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="myAreaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pie Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">热门专业</h6>
+                                <!--                                <div class="dropdown no-arrow">-->
+                                <!--                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
+                                <!--                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>-->
+                                <!--                                    </a>-->
+                                <!--                                    <div class="dropdown-menu dropdown-menu-right shadow animated&#45;&#45;fade-in"-->
+                                <!--                                         aria-labelledby="dropdownMenuLink">-->
+                                <!--                                        <div class="dropdown-header">Dropdown Header:</div>-->
+                                <!--                                        <a class="dropdown-item" href="#">Action</a>-->
+                                <!--                                        <a class="dropdown-item" href="#">Another action</a>-->
+                                <!--                                        <div class="dropdown-divider"></div>-->
+                                <!--                                        <a class="dropdown-item" href="#">Something else here</a>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <canvas id="myPieChart"></canvas>
+                                </div>
+                                <div class="mt-4 text-center small">
+                                        <span class="mr-2" id="mr-2-1">
+                                            <i class="fas fa-circle text-primary"></i>
+                                        </span>
+                                    <span class="mr-2" id="mr-2-2">
+                                            <i class="fas fa-circle text-success"></i>
+                                        </span>
+                                    <span class="mr-2" id="mr-2-3">
+                                            <i class="fas fa-circle text-info"></i>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Project Card Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">班级平均分</h6>
+                            </div>
+                            <div class="card-body" id="echartsTheGradePointAverage">
+                                <!--                                <h4 class="small font-weight-bold">Server Migration <span-->
+                                <!--                                        class="float-right">20%</span></h4>-->
+                                <!--                                <div class="progress mb-4">-->
+                                <!--                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"-->
+                                <!--                                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                <!--                                </div>-->
+                                <!--                                                                <h4 class="small font-weight-bold">Sales Tracking <span-->
+                                <!--                                                                        class="float-right">40%</span></h4>-->
+                                <!--                                                                <div class="progress mb-4">-->
+                                <!--                                                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"-->
+                                <!--                                                                         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                <!--                                                                </div>-->
+                                <!--                                <h4 class="small font-weight-bold">Customer Database <span-->
+                                <!--                                        class="float-right">60%</span></h4>-->
+                                <!--                                <div class="progress mb-4">-->
+                                <!--                                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="60"-->
+                                <!--                                         class="progress-bar" role="progressbar" style="width: 60%"></div>-->
+                                <!--                                </div>-->
+                                <!--                                <h4 class="small font-weight-bold">Payout Details <span-->
+                                <!--                                        class="float-right">80%</span></h4>-->
+                                <!--                                <div class="progress mb-4">-->
+                                <!--                                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="80"-->
+                                <!--                                         class="progress-bar bg-info" role="progressbar" style="width: 80%"></div>-->
+                                <!--                                </div>-->
+                                <!--                                <h4 class="small font-weight-bold">Account Setup <span-->
+                                <!--                                        class="float-right">Complete!</span></h4>-->
+                                <!--                                <div class="progress">-->
+                                <!--                                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"-->
+                                <!--                                         class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+
+                        <!-- Color System -->
+                        <!--                        <div class="row">-->
+                        <!--                            <div class="col-lg-6 mb-4">-->
+                        <!--                                <div class="card bg-primary text-white shadow">-->
+                        <!--                                    <div class="card-body">-->
+                        <!--                                        Primary-->
+                        <!--                                        <div class="text-white-50 small">#4e73df</div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-lg-6 mb-4">-->
+                        <!--                                <div class="card bg-success text-white shadow">-->
+                        <!--                                    <div class="card-body">-->
+                        <!--                                        Success-->
+                        <!--                                        <div class="text-white-50 small">#1cc88a</div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-lg-6 mb-4">-->
+                        <!--                                <div class="card bg-info text-white shadow">-->
+                        <!--                                    <div class="card-body">-->
+                        <!--                                        Info-->
+                        <!--                                        <div class="text-white-50 small">#36b9cc</div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-lg-6 mb-4">-->
+                        <!--                                <div class="card bg-warning text-white shadow">-->
+                        <!--                                    <div class="card-body">-->
+                        <!--                                        Warning-->
+                        <!--                                        <div class="text-white-50 small">#f6c23e</div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-lg-6 mb-4">-->
+                        <!--                                <div class="card bg-danger text-white shadow">-->
+                        <!--                                    <div class="card-body">-->
+                        <!--                                        Danger-->
+                        <!--                                        <div class="text-white-50 small">#e74a3b</div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-lg-6 mb-4">-->
+                        <!--                                <div class="card bg-secondary text-white shadow">-->
+                        <!--                                    <div class="card-body">-->
+                        <!--                                        Secondary-->
+                        <!--                                        <div class="text-white-50 small">#858796</div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-lg-6 mb-4">-->
+                        <!--                                <div class="card bg-light text-black shadow">-->
+                        <!--                                    <div class="card-body">-->
+                        <!--                                        Light-->
+                        <!--                                        <div class="text-black-50 small">#f8f9fc</div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-lg-6 mb-4">-->
+                        <!--                                <div class="card bg-dark text-white shadow">-->
+                        <!--                                    <div class="card-body">-->
+                        <!--                                        Dark-->
+                        <!--                                        <div class="text-white-50 small">#5a5c69</div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Illustrations -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">励志语言</h6>
+                            </div>
+                            <div class="card-body" id="statement">
+                                <!--                                <div class="text-center">-->
+                                <!--                                    <img alt="..." class="img-fluid px-3 px-sm-4 mt-3 mb-4"-->
+                                <!--                                         src="img/undraw_posting_photo.svg" style="width: 25rem;">-->
+                                <!--                                </div>-->
+                                <!--                                <p>Add some quality, svg illustrations to your project courtesy of <a-->
+                                <!--                                        href="https://undraw.co/" rel="nofollow" target="_blank">unDraw</a>, a-->
+                                <!--                                    constantly updated collection of beautiful svg images that you can use-->
+                                <!--                                    completely free and without attribution!</p>-->
+                                <!--                                <a href="https://undraw.co/" rel="nofollow" target="_blank">Browse Illustrations on-->
+                                <!--                                    unDraw &rarr;</a>-->
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">所有课程选择数</h6>
+                            </div>
+                            <div class="card-body" id="chart-container">
+                                <!--                                <div class="text-center">-->
+                                <!--                                    <img alt="..." class="img-fluid px-3 px-sm-4 mt-3 mb-4"-->
+                                <!--                                         src="img/undraw_posting_photo.svg" style="width: 25rem;">-->
+                                <!--                                </div>-->
+                                <!--                                <p>Add some quality, svg illustrations to your project courtesy of <a-->
+                                <!--                                        href="https://undraw.co/" rel="nofollow" target="_blank">unDraw</a>, a-->
+                                <!--                                    constantly updated collection of beautiful svg images that you can use-->
+                                <!--                                    completely free and without attribution!</p>-->
+                                <!--                                <a href="https://undraw.co/" rel="nofollow" target="_blank">Browse Illustrations on-->
+                                <!--                                    unDraw &rarr;</a>-->
+
+
+                            </div>
+
+
+                        </div>
+
+                        <!-- Approach -->
+                        <!--                        <div class="card shadow mb-4">-->
+                        <!--                            <div class="card-header py-3">-->
+                        <!--                                <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="card-body">-->
+                        <!--                                <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce-->
+                        <!--                                    CSS bloat and poor page performance. Custom CSS classes are used to create-->
+                        <!--                                    custom components and custom utility classes.</p>-->
+                        <!--                                <p class="mb-0">Before working with this theme, you should become familiar with the-->
+                        <!--                                    Bootstrap framework, especially the utility classes.</p>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2022</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="logoutModal" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">准备退出了吗?</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">如果您准备好结束当前会话，请选择下面的“退出”。</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">取消</button>
+                <a class="btn btn-primary" href="adminServlet?tag=logout">退出</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+
+</body>
+<script type="text/javascript">
+    $(function () {
+        $.getJSON("adminServlet", {tag: "cookie"},
+            function (data) {
+                $("#userName").html("");
+                $("#userDropdown image").remove();
+                $("#userName").html(data.Admin.userName)
+                $("#userDropdown").append("<img class='img-profile rounded-circle' src='" + data.avatar + "'>");
+            });
+
+        $.getJSON("adminServlet", {tag: "homepageDataAcquisition"},
+            function (json) {
+                /**
+                 * 课程总数
+                 */
+                $("#getTheTotalNumberOfCourses").html(json.getTheTotalNumberOfCourses);
+                /**
+                 * 学生总数
+                 */
+                $("#countStudent").html(json.countStudent);
+                /**
+                 * 考试及格率
+                 */
+                var getStudentExamPassRates = ((json.getStudentExamPassRates * 100).toString()).substring(0, 2)
+                console.log(getStudentExamPassRates);
+                $("#getStudentExamPassRates").html(getStudentExamPassRates + "%");
+                $("#getStudentExamPassRatesTwo").append("<div class='progress-bar bg-info' role='progressbar' style='width: " + getStudentExamPassRates + "%' aria-valuenow='50' aria-valuemin='0' aria-valuemax='100'></div>");
+
+
+                var getTheRatioOfMaleToFemaleValue = ((json.getTheRatioOfMaleToFemaleValue * 100).toString()).substring(0, 2);
+                /**
+                 * 男女比例
+                 */
+                $("#getTheRatioOfMaleToFemaleValue").html("男生占比:" + getTheRatioOfMaleToFemaleValue + "%," + "女生占比" + (100 - getTheRatioOfMaleToFemaleValue) + "%");
+
+                var echartsLength = json.echarts.length;
+                var ctx = document.getElementById("myAreaChart");
+                var myLineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [json.echarts[0].name, json.echarts[1].name, json.echarts[2].name, json.echarts[3].name, json.echarts[4].name, json.echarts[5].name, json.echarts[6].name, json.echarts[7].name, json.echarts[8].name, json.echarts[9].name, json.echarts[10].name, json.echarts[echartsLength - 1].name],
+                        datasets: [{
+                            label: "分数",
+                            lineTension: 0.3,
+                            backgroundColor: "rgba(78, 115, 223, 0.05)",
+                            borderColor: "rgba(78, 115, 223, 1)",
+                            pointRadius: 3,
+                            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                            pointBorderColor: "rgba(78, 115, 223, 1)",
+                            pointHoverRadius: 3,
+                            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                            pointHitRadius: 10,
+                            pointBorderWidth: 2,
+                            data: [json.echarts[0].value, json.echarts[1].value, json.echarts[2].value, json.echarts[3].value, json.echarts[4].value, json.echarts[5].value, json.echarts[6].value, json.echarts[7].value, json.echarts[8].value, json.echarts[9].value, json.echarts[10].value, json.echarts[echartsLength - 1].value],
+                        }],
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: {
+                                left: 10,
+                                right: 25,
+                                top: 25,
+                                bottom: 0
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                time: {
+                                    unit: 'date'
+                                },
+                                gridLines: {
+                                    display: false,
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    maxTicksLimit: 7
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    maxTicksLimit: 5,
+                                    padding: 10,
+                                    // Include a dollar sign in the ticks
+                                    callback: function (value, index, values) {
+                                        return '' + number_format(value);
+                                    }
+                                },
+                                gridLines: {
+                                    color: "rgb(234, 236, 244)",
+                                    zeroLineColor: "rgb(234, 236, 244)",
+                                    drawBorder: false,
+                                    borderDash: [2],
+                                    zeroLineBorderDash: [2]
+                                }
+                            }],
+                        },
+                        legend: {
+                            display: false
+                        },
+                        tooltips: {
+                            backgroundColor: "rgb(255,255,255)",
+                            bodyFontColor: "#858796",
+                            titleMarginBottom: 10,
+                            titleFontColor: '#6e707e',
+                            titleFontSize: 14,
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            xPadding: 15,
+                            yPadding: 15,
+                            displayColors: false,
+                            intersect: false,
+                            mode: 'index',
+                            caretPadding: 10,
+                            callbacks: {
+                                label: function (tooltipItem, chart) {
+                                    var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                    return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+                                }
+                            }
+                        }
+                    }
+                });
+
+                /**
+                 * 饼状图
+                 */
+                var echartsSujectLength = json.echartsSuject.length;
+                var ctx = document.getElementById("myPieChart");
+                var myPieChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [json.echartsSuject[echartsSujectLength - 3].name, json.echartsSuject[echartsSujectLength - 2].name, json.echartsSuject[echartsSujectLength - 1].name],
+                        datasets: [{
+                            data: [json.echartsSuject[echartsSujectLength - 3].value, json.echartsSuject[echartsSujectLength - 2].value, json.echartsSuject[echartsSujectLength - 1].value],
+                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                            hoverBorderColor: "rgba(234, 236, 244, 1)",
+                        }],
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        tooltips: {
+                            backgroundColor: "rgb(255,255,255)",
+                            bodyFontColor: "#858796",
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            xPadding: 15,
+                            yPadding: 15,
+                            displayColors: false,
+                            caretPadding: 10,
+                        },
+                        legend: {
+                            display: false
+                        },
+                        cutoutPercentage: 80,
+                    },
+                });
+
+                $("#mr-2-1").append(json.echartsSuject[echartsSujectLength - 3].name);
+                $("#mr-2-2").append(json.echartsSuject[echartsSujectLength - 2].name);
+                $("#mr-2-3").append(json.echartsSuject[echartsSujectLength - 1].name);
+
+
+                var echartsTheGradePointAverage = $("#echartsTheGradePointAverage");
+                var echartsTheGradePointAverageLength = json.echartsTheGradePointAverage.length;
+                var str = "";
+                str += "<h4 class='small font-weight-bold'>" + json.echartsTheGradePointAverage[0].name + "<span class='float-right'>" + json.echartsTheGradePointAverage[0].value + "分</span></h4>";
+                str += "<div class='progress mb-4'><div class='progress-bar bg-danger' role='progressbar' style='width: " + json.echartsTheGradePointAverage[0].value + "%'aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                str += "<h4 class='small font-weight-bold'>" + json.echartsTheGradePointAverage[1].name + "<span class='float-right'>" + json.echartsTheGradePointAverage[1].value + "分</span></h4>";
+                str += "<div class='progress mb-4'><div class='progress-bar bg-warning' role='progressbar' style='width: " + json.echartsTheGradePointAverage[1].value + "%' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                str += "<h4 class='small font-weight-bold'>" + json.echartsTheGradePointAverage[2].name + "<span class='float-right'>" + json.echartsTheGradePointAverage[2].value + "分</span></h4>";
+                str += "<div class='progress mb-4'><div class='progress-bar' role='progressbar' style='width: " + json.echartsTheGradePointAverage[2].value + "%' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                str += "<h4 class='small font-weight-bold'>" + json.echartsTheGradePointAverage[echartsTheGradePointAverageLength - 2].name + "<span class='float-right'>" + json.echartsTheGradePointAverage[echartsTheGradePointAverageLength - 2].value + "分</span></h4>";
+                str += "<div class='progress mb-4'><div class='progress-bar bg-info' role='progressbar' style='width: " + json.echartsTheGradePointAverage[echartsTheGradePointAverageLength - 2].value + "%' aria-valuenow='80' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                str += "<h4 class='small font-weight-bold'>" + json.echartsTheGradePointAverage[echartsTheGradePointAverageLength - 1].name + "<span class='float-right'>" + json.echartsTheGradePointAverage[echartsTheGradePointAverageLength - 1].value + "分</span></h4>";
+                str += " <div class='progress'><div class='progress-bar bg-success' role='progressbar' style='width: " + json.echartsTheGradePointAverage[echartsTheGradePointAverageLength - 1].value + "%' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                echartsTheGradePointAverage.append(str);
+
+
+
+                var dom = document.getElementById('chart-container');
+                var myChart = echarts.init(dom, null, {
+                    renderer: 'canvas',
+                    useDirtyRect: false
+                });
+                var app = {};
+
+                var option;
+
+                option = {
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        top: '90%',
+                        left: 'center'
+                    },
+                    series: [
+                        {
+                            name: 'Access From',
+                            type: 'pie',
+                            radius: ['40%', '70%'],
+                            avoidLabelOverlap: false,
+                            itemStyle: {
+                                borderRadius: 10,
+                                borderColor: '#fff',
+                                borderWidth: 2
+                            },
+                            label: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    fontSize: '40',
+                                    fontWeight: 'bold'
+                                }
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            data:json.echartsSuject
+                        }
+                    ]
+                };
+
+
+                if (option && typeof option === 'object') {
+                    myChart.setOption(option);
+                }
+
+                window.addEventListener('resize', myChart.resize);
+            });
+    })
+
+    // $(function() {
+    //     $("#fileAvatar").click(function() {
+    //         $("#fileUploadTable").toggle(
+    //             function() {
+    //             $("#fileUploadTable").show();
+    //         },function() {
+    //                 $("#fileUploadTable").hide();
+    //         });
+    //     });
+    // });
+
+    function fileAvatar() {
+        $("#fileUploadTable").toggle(function () {
+            $("#fileUploadTable").show();
+        });
+        return false;
+    }
+
+
+    function getOneGreatWord() { //生成随机励志句
+        var str = "0.条条大路通罗马。1.有得有失，才是人生，切忌忿忿不平。2.你为了爱所做的一切，不应该只是单方面的牺牲；而是你也要发自内心地快乐，因为真正爱你的人，一定会想办法让你过得更快乐。3.我从不担心我努力了不优秀，只担心优秀的人都比我更努力。4.人都有自己的做人之志和生存之道，最终归结为道德底线。5.我觉得坦途在前，人又何必因了一点小障碍而不走路呢。6.如果有一天他们不能在一起，不是他太坏，而是她太好。7.凡是有良好教养的人有一禁诫：勿发脾气。8.志在山顶的人，不会贪念山腰的风景。9.今天应做的事没有做，明天再早也是耽误了。10.如果人没有错误，那铅笔还用橡皮干什么。11.孤独不是给别人机会来可怜你，而是给你机会发现更强大的自己。12.自信是成功的第一秘诀。13.富人靠资本赚钱，穷人靠知识致富。14.只要充分相信自己，没有什么困难可以足够持久。15.生活坏到一定程度就会好起来，因为它无法更坏。16.宽恕节省了生气的开支，憎恨的代价，以及能量的浪费。17.拥有青春，就拥有了一份潇洒和风流；拥有青春，就拥有了一份灿烂和微笑。18.你应感谢每位让你蜕变的人无论方式的好坏。19.诚实是成功者最珍贵的品格。20.世界上没有强大的敌人，只有不够强大的自己。21.知识是上帝付与给你去雕琢的宝石。22.当你说离开是为了不让对方受到伤害的时候，你已经给对方造成了最大的伤害。23.死亡教会人一切，如同考试之后公布的结果――虽然恍然大悟，但为时晚矣。24.时刻回想自己有什么，想要什么，自己为此做了什么。25.我一无所有，这意味着我拥有无限可能。26.亲爱的，请给这段爱一个开始，我会用心去写下属于我们的故事。27.胜利是不会向我们走来的，我必须自己走向胜利。28.把一切平凡的事做好就不平凡；把一切简单的事做好就不简单。29.刘翔永远是我们心目中的飞人，中国的骄傲，真正的赢家，支持刘翔的送鲜花。30.白天对于懒惰者等于黑夜，黑夜对于勤奋者来说等于白天。31.人只要不失去方向，就不会失去自己。32.小提琴即使断了一根弦，其余的三根弦还是要继续演奏,这就是人生。33.生活就像一杯浓酒，不经三番五次的提炼，就不会这样可口！34.路在自己脚下，没有人可以决定你的方向。35.现实的城市犹如雾中的风景，隐隐地散发着忧郁的美，承载着没有承诺的梦。36.也许所谓的幸福结局，就是抱着永不放弃的希望，继续前行。37.莎士比亚说：我们这个年纪有爱却没有未来。38.一切幸福都并非没有烦恼，而一切逆境也绝非没有希望。39.不嫉妒别人，不封闭自己，人才会大气,人大气了，天地才会变得宽广。40.每一种取舍都有不同的终局，就如走不同的路就会有不同的景致,所以，假如想看残酷的风景，不妨沉思片刻再做决定。";
+        //生成随机数 0-40
+        var $num = Math.round(Math.random() * 40);
+        var $rows = str.split("。");
+        var start = $rows[$num - 1].indexOf('.');
+        var result = $rows[$num - 1].substring(start + 1);
+        return (result);
+    }
+
+    $("#statement").html(getOneGreatWord());
+
+
+</script>
+</html>
