@@ -174,7 +174,7 @@ public class AdminServlet extends HttpServlet {
 
     private void fuzzyQuery(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         /**
-         * 根据学号模糊查询数据
+         * 根据学生姓名进行模糊查询数据
          */
         String studentName = req.getParameter("studentName");
         if (studentName != null && studentName != "") {
