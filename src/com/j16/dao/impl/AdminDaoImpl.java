@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * 用户名查重
+ * 管理员用户实现类
  *
  * @author Master
  */
