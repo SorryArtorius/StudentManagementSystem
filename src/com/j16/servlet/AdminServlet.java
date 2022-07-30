@@ -27,50 +27,6 @@ public class AdminServlet extends HttpServlet {
      */
     public int studentNoEdit = 0;
 
-    /**
-     * 首页图形数据加载
-     *
-     * @param resp
-     * @throws IOException
-     */
-    private static void homepageDataAcquisition(HttpServletResponse resp) throws IOException {
-        /**
-         * 获取课程数量
-         */
-        int getTheTotalNumberOfCourses = new AdminServiceImpl().getTheTotalNumberOfCourses();
-        /**
-         * 获取学生总数
-         */
-        int countStudent = new AdminServiceImpl().countStudent();
-        /**
-         * 考试及格率
-         */
-        double getStudentExamPassRates = new AdminServiceImpl().getStudentExamPassRates();
-        /**
-         * 男女比例值
-         */
-        double getTheRatioOfMaleToFemaleValue = new AdminServiceImpl().getTheRatioOfMaleToFemaleValue();
-        /**
-         * 获取成绩与姓名
-         */
-        List<Echarts> echarts = new AdminServiceImpl().getGradesAndNames();
-        /**
-         * 获取热门的科目信息
-         */
-        List<Echarts> echartsSuject = new AdminServiceImpl().getPopularCourses();
-        List<Echarts> echartsTheGradePointAverage = new AdminServiceImpl().getTheGradePointAverage();
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("getTheTotalNumberOfCourses", getTheTotalNumberOfCourses);
-        jsonObject.put("countStudent", countStudent);
-        jsonObject.put("getStudentExamPassRates", getStudentExamPassRates);
-        jsonObject.put("getTheRatioOfMaleToFemaleValue", getTheRatioOfMaleToFemaleValue);
-        jsonObject.put("echarts", echarts);
-        jsonObject.put("echartsSuject", echartsSuject);
-        jsonObject.put("echartsTheGradePointAverage", echartsTheGradePointAverage);
-        String dataCollection = jsonObject.toJSONString();
-        resp.getWriter().write(dataCollection);
-        System.out.println(dataCollection);
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -119,29 +75,15 @@ public class AdminServlet extends HttpServlet {
             boolean studentNoSelect = new AdminServiceImpl().selectStudent(studentNo);
             resp.getWriter().write(studentNoSelect + "");
         } else if ("loadGradesAndCourses".equals(tag)) {
-            int studentNo = Integer.parseInt(req.getParameter("studentNoSelect"));
-            String studentName = new AdminServiceImpl().getStudentNameUsingStudentNumber(studentNo);
-            List<Echarts> loadGradesAndCourses = new AdminServiceImpl().getCourseNameAndGrade(studentNo);
-            req.getSession().setAttribute("loadGradesAndCoursesSize", loadGradesAndCourses.size());
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("studentName", studentName);
-            jsonObject.put("loadGradesAndCourses", loadGradesAndCourses);
-            String json = jsonObject.toJSONString();
-            resp.getWriter().write(json);
-        } else if ("fuzzyQuery".equals(tag)) {
             /**
-             * 根据学号模糊查询数据
+             * 加载成绩和课程
              */
-            String studentName = req.getParameter("studentName");
-            if (studentName != null && studentName != "") {
-                List<Student> students = new AdminServiceImpl().fuzzyQueryStudent(studentName);
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("studentsNameFuzzyQuery", students);
-                String studentsNameFuzzyQuery = jsonObject.toJSONString();
-                resp.getWriter().write(studentsNameFuzzyQuery);
-            }
+            loadGradesAndCourses(req, resp);
+        } else if ("fuzzyQuery".equals(tag)) {
+            fuzzyQuery(req, resp);
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -159,9 +101,89 @@ public class AdminServlet extends HttpServlet {
             updateAdminPassword(req, resp);
         } else if ("updateStudentResult".equals(tag)) {
             updateStudentResult(req, resp);
-
         }
 
+    }
+
+
+    /**
+     * 首页图形数据加载
+     *
+     * @param resp
+     * @throws IOException
+     */
+    private void homepageDataAcquisition(HttpServletResponse resp) throws IOException {
+        /**
+         * 获取课程数量
+         */
+        int getTheTotalNumberOfCourses = new AdminServiceImpl().getTheTotalNumberOfCourses();
+        /**
+         * 获取学生总数
+         */
+        int countStudent = new AdminServiceImpl().countStudent();
+        /**
+         * 考试及格率
+         */
+        double getStudentExamPassRates = new AdminServiceImpl().getStudentExamPassRates();
+        /**
+         * 男女比例值
+         */
+        double getTheRatioOfMaleToFemaleValue = new AdminServiceImpl().getTheRatioOfMaleToFemaleValue();
+        /**
+         * 获取成绩与姓名
+         */
+        List<Echarts> echarts = new AdminServiceImpl().getGradesAndNames();
+        /**
+         * 获取热门的科目信息
+         */
+        List<Echarts> echartsSuject = new AdminServiceImpl().getPopularCourses();
+        List<Echarts> echartsTheGradePointAverage = new AdminServiceImpl().getTheGradePointAverage();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("getTheTotalNumberOfCourses", getTheTotalNumberOfCourses);
+        jsonObject.put("countStudent", countStudent);
+        jsonObject.put("getStudentExamPassRates", getStudentExamPassRates);
+        jsonObject.put("getTheRatioOfMaleToFemaleValue", getTheRatioOfMaleToFemaleValue);
+        jsonObject.put("echarts", echarts);
+        jsonObject.put("echartsSuject", echartsSuject);
+        jsonObject.put("echartsTheGradePointAverage", echartsTheGradePointAverage);
+        String dataCollection = jsonObject.toJSONString();
+        resp.getWriter().write(dataCollection);
+        System.out.println(dataCollection);
+    }
+
+
+    /**
+     * 加载成绩和课程
+     *
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
+    private void loadGradesAndCourses(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int studentNo = Integer.parseInt(req.getParameter("studentNoSelect"));
+        String studentName = new AdminServiceImpl().getStudentNameUsingStudentNumber(studentNo);
+        List<Echarts> loadGradesAndCourses = new AdminServiceImpl().getCourseNameAndGrade(studentNo);
+        req.getSession().setAttribute("loadGradesAndCoursesSize", loadGradesAndCourses.size());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("studentName", studentName);
+        jsonObject.put("loadGradesAndCourses", loadGradesAndCourses);
+        String json = jsonObject.toJSONString();
+        resp.getWriter().write(json);
+    }
+
+
+    private void fuzzyQuery(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        /**
+         * 根据学号模糊查询数据
+         */
+        String studentName = req.getParameter("studentName");
+        if (studentName != null && studentName != "") {
+            List<Student> students = new AdminServiceImpl().fuzzyQueryStudent(studentName);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("studentsNameFuzzyQuery", students);
+            String studentsNameFuzzyQuery = jsonObject.toJSONString();
+            resp.getWriter().write(studentsNameFuzzyQuery);
+        }
     }
 
 
