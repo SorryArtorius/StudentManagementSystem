@@ -406,4 +406,15 @@ public class AdminServiceImpl implements AdminService {
     public int updateStudentResult(int studentNo, Echarts echarts) {
         return adminDaoImpl.updateStudentResult(studentNo, echarts);
     }
+
+    /**
+     * 对学生姓名进行模糊查询
+     *
+     * @param studentName
+     * @return
+     */
+    @Override
+    public List<Student> fuzzyQueryStudent(String studentName) {
+        return adminDaoImpl.fuzzyQueryStudent(studentName);
+    }
 }

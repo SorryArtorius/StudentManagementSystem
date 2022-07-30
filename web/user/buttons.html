@@ -900,12 +900,12 @@
                                 var str = "";
                                 $("#gradeRevisionEditTable tr:gt(0)").remove();
                                 str += "<tr>";
-                                str += "<td>学生姓名:</td>"
+                                str += "<td>学生姓名:</td>";
                                 str += "<td><input name='studentNameOld' type='text' value='" + json.studentName + "' readonly></td>";
                                 str += "</tr>";
                                 for (var i = 0; i < json.loadGradesAndCourses.length; i++) {
                                     str += "<tr>";
-                                    str += "<td>" + json.loadGradesAndCourses[i].name + ":</td>"
+                                    str += "<td>" + json.loadGradesAndCourses[i].name + ":</td>";
                                     str += "<td><input name='studentScore" + i + "' type='text' value='" + json.loadGradesAndCourses[i].value + "'></td>";
                                     str += "</tr>";
                                 }

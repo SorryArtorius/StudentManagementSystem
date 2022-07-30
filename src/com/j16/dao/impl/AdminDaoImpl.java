@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * 管理员用户实现类
+ * 管理员用户的实现方法
  *
  * @author Master
  */
@@ -1020,6 +1020,53 @@ public class AdminDaoImpl implements AdminDao {
             }
         }
         return 0;
+    }
+
+    /**
+     * 对学生姓名进行模糊查询
+     *
+     * @param studentName
+     * @return
+     */
+    @Override
+    public List<Student> fuzzyQueryStudent(String studentName) {
+        String sql = "select * from student where studentName like ? ";
+        List<Student> students = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = BaseDao.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setObject(1, "%"+studentName+"%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setStudentNo(rs.getInt("studentNo"));
+                student.setStudentName(rs.getString("studentName"));
+                student.setLoginPwd(rs.getString("loginPwd"));
+                student.setSex(rs.getString("sex"));
+                student.setGradeId(rs.getInt("gradeId"));
+                student.setPhone(rs.getString("phone"));
+                student.setAddress(rs.getString("address"));
+                student.setBornDate(rs.getString("bornDate"));
+                student.setEmail(rs.getString("email"));
+                student.setIdentityCard(rs.getString("identityCard"));
+                student.setMark(rs.getInt("mark"));
+                students.add(student);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                BaseDao.closeAll(conn, ps, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return students;
     }
 }
 

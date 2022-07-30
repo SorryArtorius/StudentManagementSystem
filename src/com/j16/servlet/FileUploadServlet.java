@@ -79,9 +79,8 @@ public class FileUploadServlet extends HttpServlet {
                             System.out.print("上传成功后的文件名是：" + newFileName +
                                     "，文件大小是：" + item.getSize() + "bytes!");
                             Admin admin = (Admin) req.getSession().getAttribute("admin");
-                            StringBuffer avatar = new StringBuffer();
-                            avatar.append("avatar\\");
-                            avatar.append(newFileName);
+                            String avatar = "avatar\\" +
+                                    newFileName;
                             adminService.fileAvatarUpdate(String.valueOf(avatar), admin.getId());
 
                         }

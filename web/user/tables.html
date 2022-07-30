@@ -167,15 +167,16 @@
                 <!-- Topbar Search -->
                 <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <!--                    <div class="input-group">-->
-                    <!--                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."-->
-                    <!--                               aria-label="Search" aria-describedby="basic-addon2">-->
-                    <!--                        <div class="input-group-append">-->
-                    <!--                            <button class="btn btn-primary" type="button">-->
-                    <!--                                <i class="fas fa-search fa-sm"></i>-->
-                    <!--                            </button>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
+                    <div class="input-group">
+                        <input aria-describedby="basic-addon2" aria-label="Search" class="form-control bg-light border-0 small"
+                               id="Search" onblur="fuzzyQueryMouseOut()" placeholder="请输入名称..."
+                               type="text">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" onclick="fuzzyQuery();" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
                 </form>
 
                 <!-- Topbar Navbar -->
@@ -183,7 +184,8 @@
 
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
                            href="#" id="searchDropdown" role="button">
                             <i class="fas fa-search fa-fw"></i>
                         </a>
@@ -330,7 +332,8 @@
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
                            href="#" id="userDropdown" role="button">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="userName"></span>
                         </a>
@@ -497,6 +500,14 @@
 
 </body>
 <script type="text/javascript">
+
+    /**
+     * 保留当前页数
+     * @type {number}
+     */
+    var pagesIndexs = 1;
+
+
     $(function () {
         /**
          * 获取登录者的用户名
@@ -515,7 +526,7 @@
     });
 
     function initData(pagesIndex) {
-
+        pagesIndexs = pagesIndex;
 
         $.getJSON("adminServlet", {tag: "showTables", pagesIndex: pagesIndex},
             function (data) {
@@ -616,5 +627,60 @@
         });
         return false;
     }
+
+
+    /**
+     * 鼠标移开若是没有内容就显示所有的学生
+     */
+    function fuzzyQueryMouseOut() {
+        var Search = $("#Search").val();
+        if (Search == "" || Search == null) {
+            initData(pagesIndexs);
+        }
+    }
+
+    /**
+     * 点击搜索后
+     */
+    function fuzzyQuery() {
+        var Search = $("#Search").val();
+        $.getJSON("adminServlet", {tag: "fuzzyQuery", studentName: Search}, function (data) {
+            var loadTable = $("#loadTable");
+            $("#loadTable tr").remove();
+            var str = "";
+            for (var i = 0; i < data.studentsNameFuzzyQuery.length; i++) {
+                str += "<tr>";
+                str += "<td><a href='adminServlet?tag=tablesEdit&studentNo=" + data.studentsNameFuzzyQuery[i].studentNo + "'>" + data.studentsNameFuzzyQuery[i].studentNo + "</a></td>";
+                str += "<td>" + data.studentsNameFuzzyQuery[i].studentName + "</td>";
+                str += "<td>" + data.studentsNameFuzzyQuery[i].sex + "</td>";
+                str += "<td>" + data.studentsNameFuzzyQuery[i].gradeName + "</td>";
+                str += "<td>" + data.studentsNameFuzzyQuery[i].phone + "</td>";
+                str += "<td>" + data.studentsNameFuzzyQuery[i].address + "</td>";
+                str += "<td>" + data.studentsNameFuzzyQuery[i].email + "</td>";
+                str += "<td>" + data.studentsNameFuzzyQuery[i].identityCard + "</td>";
+                str += "<td>";
+                str += "<a href='adminServlet?tag=deleteStudent&studentNo=" + data.studentsNameFuzzyQuery[i].studentNo + "' class='btn btn-danger btn-circle btn-sm'>";
+                str += "<i class='fas fa-trash'></i>";
+                str += "</a>";
+                str += "</tr>";
+            }
+            loadTable.append(str);
+
+            /**
+             * 显示序列号
+             * @type {*|jQuery|HTMLElement}
+             */
+            $("#dataTable_info").html("");
+            $("#dataTable_info").html("共" + data.studentsNameFuzzyQuery.length + "个条数据");
+
+            str = "";
+            var showNextPage = $("#showNextPage");
+            $("#showNextPage li").remove();
+
+            showNextPage.append(str);
+            return false;
+        });
+    }
+
 </script>
 </html>

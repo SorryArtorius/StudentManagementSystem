@@ -298,4 +298,13 @@ public interface AdminDao {
      * @return
      */
     int updateStudentResult(int studentNo, Echarts echarts);
+
+
+    /**
+     * 对学生姓名进行模糊查询
+     *
+     * @param studentName
+     * @return
+     */
+    List<Student> fuzzyQueryStudent(String studentName);
 }
