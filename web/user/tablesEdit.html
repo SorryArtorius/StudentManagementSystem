@@ -4,10 +4,10 @@
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
 
     <title> - TablesEdit - </title>
 
@@ -61,16 +61,16 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-               aria-expanded="true" aria-controls="collapseTwo">
+            <a aria-controls="collapseTwo" aria-expanded="true" class="nav-link collapsed" data-target="#collapseTwo"
+               data-toggle="collapse" href="#">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>管理</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div aria-labelledby="headingTwo" class="collapse" data-parent="#accordionSidebar" id="collapseTwo">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">信息操作:</h6>
                     <a class="collapse-item" href="adminServlet?tag=tableAdd">信息处理</a>
-<!--                    <a class="collapse-item" href="adminServlet?tag=cards">聚合查询</a>-->
+                    <!--                    <a class="collapse-item" href="adminServlet?tag=cards">聚合查询</a>-->
                 </div>
             </div>
         </li>
@@ -82,8 +82,8 @@
             <!--                    <i class="fas fa-fw fa-wrench"></i>-->
             <!--                    <span>Utilities</span>-->
             <!--                </a>-->
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
+            <div aria-labelledby="headingUtilities" class="collapse" data-parent="#accordionSidebar"
+                 id="collapseUtilities">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
                     <a class="collapse-item" href="utilities-color.html">Colors</a>
@@ -109,7 +109,7 @@
             <!--                    <i class="fas fa-fw fa-folder"></i>-->
             <!--                    <span>Pages</span>-->
             <!--                </a>-->
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div aria-labelledby="headingPages" class="collapse" data-parent="#accordionSidebar" id="collapsePages">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Login Screens:</h6>
                     <a class="collapse-item" href="login.html">Login</a>
@@ -124,11 +124,11 @@
         </li>
 
         <!-- Nav Item - Charts -->
-<!--        <li class="nav-item">-->
-<!--            <a class="nav-link" href="adminServlet?tag=charts">-->
-<!--                <i class="fas fa-fw fa-chart-area"></i>-->
-<!--                <span>数据</span></a>-->
-<!--        </li>-->
+        <!--        <li class="nav-item">-->
+        <!--            <a class="nav-link" href="adminServlet?tag=charts">-->
+        <!--                <i class="fas fa-fw fa-chart-area"></i>-->
+        <!--                <span>数据</span></a>-->
+        <!--        </li>-->
 
         <!-- Nav Item - Tables -->
         <li class="nav-item active">
@@ -149,7 +149,7 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div class="d-flex flex-column" id="content-wrapper">
 
         <!-- Main Content -->
         <div id="content">
@@ -159,7 +159,7 @@
 
                 <!-- Sidebar Toggle (Topbar) -->
                 <form class="form-inline">
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
                         <i class="fa fa-bars"></i>
                     </button>
                 </form>
@@ -167,15 +167,15 @@
                 <!-- Topbar Search -->
                 <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-<!--                    <div class="input-group">-->
-<!--                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."-->
-<!--                               aria-label="Search" aria-describedby="basic-addon2">-->
-<!--                        <div class="input-group-append">-->
-<!--                            <button class="btn btn-primary" type="button">-->
-<!--                                <i class="fas fa-search fa-sm"></i>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                    <div class="input-group">-->
+                    <!--                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."-->
+                    <!--                               aria-label="Search" aria-describedby="basic-addon2">-->
+                    <!--                        <div class="input-group-append">-->
+                    <!--                            <button class="btn btn-primary" type="button">-->
+                    <!--                                <i class="fas fa-search fa-sm"></i>-->
+                    <!--                            </button>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </form>
 
                 <!-- Topbar Navbar -->
@@ -183,18 +183,18 @@
 
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                           href="#" id="searchDropdown" role="button">
                             <i class="fas fa-search fa-fw"></i>
                         </a>
                         <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                             aria-labelledby="searchDropdown">
+                        <div aria-labelledby="searchDropdown"
+                             class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in">
                             <form class="form-inline mr-auto w-100 navbar-search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                           placeholder="Search for..." aria-label="Search"
-                                           aria-describedby="basic-addon2">
+                                    <input aria-describedby="basic-addon2" aria-label="Search"
+                                           class="form-control bg-light border-0 small" placeholder="Search for..."
+                                           type="text">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
                                             <i class="fas fa-search fa-sm"></i>
@@ -330,20 +330,20 @@
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                           href="#" id="userDropdown" role="button">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="userName"></span>
                         </a>
                         <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="userDropdown">
+                        <div aria-labelledby="userDropdown"
+                             class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
                             <a class="dropdown-item" href="#" id="fileAvatar" onclick="return fileAvatar()">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 头像
                             </a>
-                            <form action="fileUploadServlet" method="post" id="fileUploadTable"
-                                  enctype="multipart/form-data" style="display:none;">
-                                <input type="file" name="fileType"></input>
+                            <form action="fileUploadServlet" enctype="multipart/form-data" id="fileUploadTable"
+                                  method="post" style="display:none;">
+                                <input name="fileType" type="file"></input>
                                 <a class="dropdown-item" href="#" onclick="fileUploadTable.submit()">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     上传
@@ -358,7 +358,7 @@
                             <!--                                Activity Log-->
                             <!--                            </a>-->
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <a class="dropdown-item" data-target="#logoutModal" data-toggle="modal" href="#">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 退出
                             </a>
@@ -385,12 +385,12 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form class="form-horizontal" action="adminServlet?tag=updateTable" method="post"
-                                  id="updateFormTable">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
-                                       text-align="center">
+                            <form action="adminServlet?tag=updateTable" class="form-horizontal" id="updateFormTable"
+                                  method="post">
+                                <table cellspacing="0" class="table table-bordered" id="dataTable" text-align="center"
+                                       width="100%">
                                 </table>
-                                <a href="#" class="btn btn-success btn-icon-split"
+                                <a class="btn btn-success btn-icon-split" href="#"
                                    onclick="updateFormTable.submit()">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-check"></i>
@@ -402,7 +402,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
                                 <!-- 显示标号-->
-                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"></div>
+                                <div aria-live="polite" class="dataTables_info" id="dataTable_info" role="status"></div>
                             </div>
                             <!-- 显示上下页-->
                             <div class="col-sm-12 col-md-7">
@@ -442,19 +442,19 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="logoutModal" role="dialog"
+     tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">准备退出了吗?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">如果您准备好结束当前会话，请选择下面的“退出”</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">取消</button>
                 <a class="btn btn-primary" href="adminServlet?tag=logout">退出</a>
             </div>
         </div>

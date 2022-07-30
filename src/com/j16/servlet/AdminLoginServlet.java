@@ -73,10 +73,10 @@ public class AdminLoginServlet extends HttpServlet {
         String mD5Pwd = Md5Util.mD5(pwd);
         boolean userBool = adminServiceImpl.selectAdmin(user);
         if (!userBool && pwd.equals(pwds)) {
-            if(adminServiceImpl.selectAdmins(user)){
-                adminServiceImpl.updateAdminState(user,mD5Pwd);
+            if (adminServiceImpl.selectAdmins(user)) {
+                adminServiceImpl.updateAdminState(user, mD5Pwd);
                 resp.sendRedirect("adminServlet?tag=show");
-            }else {
+            } else {
                 admin.setUserName(user);
                 admin.setUserPwd(mD5Pwd);
                 admin.setMark(1);

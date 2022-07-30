@@ -24,7 +24,7 @@
 <script>
     var boolName = false;
     var boolPwd = false;
-    var boolVerification=false;
+    var boolVerification = false;
 
     $(function () {
         $("#registerAccount").css({"pointer-events": "none"});
@@ -75,7 +75,7 @@
 
 
     function boolLogin() {
-        if (boolName == true && boolPwd == true && boolVerification==true) {
+        if (boolName == true && boolPwd == true && boolVerification == true) {
             $("#registerAccount").css({"pointer-events": "auto"});
         } else {
             $("#registerAccount").css({"pointer-events": "none"});
@@ -94,18 +94,18 @@
         var userImgCode = $("#userImgCodeView").val();
         if (userImgCode == "" || userImgCode == null) {
             $("#spanImgCode").html("欢迎光临");
-            boolVerification=false;
+            boolVerification = false;
         } else {
             $.post("response", {userImgCode: userImgCode},
                 function (data) {
                     console.log(data);
                     if (data == "true") {
                         $("#spanImgCode").html("验证码正确");
-                        boolVerification=true;
+                        boolVerification = true;
                         boolLogin();
                     } else {
                         $("#spanImgCode").html("验证码错误");
-                        boolVerification=false;
+                        boolVerification = false;
                     }
                 });
         }

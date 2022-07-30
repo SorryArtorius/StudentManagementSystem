@@ -3,6 +3,7 @@ package com.j16.pojo;
 /**
  * 适用于数据统计的实体类
  * 本类用于统计班级选择人数
+ *
  * @author Master
  */
 public class Statistics {

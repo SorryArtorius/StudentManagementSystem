@@ -13,8 +13,8 @@ import java.io.IOException;
          * 加载项设置参数
         */
         initParams = {
-        @WebInitParam(name = "character", value = "utf-8")
-})
+                @WebInitParam(name = "character", value = "utf-8")
+        })
 public class ByteEncodingFilter implements Filter {
 
     public String character;

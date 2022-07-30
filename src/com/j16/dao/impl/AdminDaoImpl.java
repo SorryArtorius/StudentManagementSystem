@@ -566,8 +566,8 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public int updateStudentState(Student student) {
         String sql = "update student set studentName=?,loginPwd=?,sex=?, gradeId=?,phone=?,address=?,bornDate=?,email=?,mark=1 where studentNo=?";
-        return BaseDao.additionsDeletionsModifications(sql,student.getStudentName(),student.getLoginPwd(),student.getSex()
-        ,student.getGradeId(),student.getPhone(),student.getAddress(),student.getBornDate(),student.getEmail(),student.getStudentNo());
+        return BaseDao.additionsDeletionsModifications(sql, student.getStudentName(), student.getLoginPwd(), student.getSex()
+                , student.getGradeId(), student.getPhone(), student.getAddress(), student.getBornDate(), student.getEmail(), student.getStudentNo());
     }
 
 
@@ -998,16 +998,16 @@ public class AdminDaoImpl implements AdminDao {
      * @return
      */
     @Override
-    public int updateStudentResult(int studentNo,Echarts echarts) {
+    public int updateStudentResult(int studentNo, Echarts echarts) {
         String sql = "update student  as st left outer join result  as re on st.studentNo = re.studentNo left outer join subject as su on re.subjectNo = su.subjectNo set re.studentResult=? where !ISNULL(re.studentResult) AND st.studentNo=?  AND su.subjectName=?";
         Connection conn = null;
         PreparedStatement ps = null;
         try {
             conn = BaseDao.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setObject(1,echarts.getValue());
-            ps.setObject(2,studentNo);
-            ps.setObject(3,echarts.getName());
+            ps.setObject(1, echarts.getValue());
+            ps.setObject(2, studentNo);
+            ps.setObject(3, echarts.getName());
             return ps.executeUpdate();
 
         } catch (Exception e) {

@@ -81,44 +81,92 @@ public class AdminServlet extends HttpServlet {
             tag = req.getParameter("tag");
         }
         if ("show".equals(tag)) {
+            /**
+             * 显示Index.html页面
+             */
             showIndex(req, resp);
         } else if ("cookie".equals(tag)) {
+            /**
+             * 读写储存在cookie里的数值
+             */
             getCookie(req, resp);
         } else if ("tables".equals(tag)) {
+            /**
+             * 显示charts.html页面
+             */
             showTable(req, resp);
         } else if ("charts".equals(tag)) {
+            /**
+             * 显示/charts.html页面
+             */
             showCharts(req, resp);
         } else if ("showTables".equals(tag)) {
+            /**
+             * 获取分页属性
+             */
             getPagination(req, resp);
         } else if ("logout".equals(tag)) {
+            /**
+             * 退出登录
+             */
             logout(req, resp);
         } else if ("cards".equals(tag)) {
+            /**
+             * 显示cards.html页面(保留页面未制作功能)
+             */
             showCards(req, resp);
         } else if ("tableAdd".equals(tag)) {
+            /**
+             * 显示buttons.html页面
+             */
             showButtons(req, resp);
         } else if ("tablesEdit".equals(tag)) {
+            /**
+             * 点击修改时获取被修改学生的学号
+             */
             if (req.getParameter("studentNo") != null) {
                 studentNoEdit = Integer.parseInt(req.getParameter("studentNo"));
             }
             showTablesEdit(req, resp);
         } else if ("tablesEdits".equals(tag)) {
+            /**
+             * 修改学生信息
+             */
             tablesEdits(resp);
         } else if ("selectGradeAndSex".equals(tag)) {
+            /**
+             * 获取年级与性别
+             */
             selectGradeAndSex(resp);
         } else if ("deleteStudent".equals(tag)) {
+            /**
+             * 删除学生
+             */
             deleteStudent(req, resp);
         } else if ("passwordSelect".equals(tag)) {
+            /**
+             *密码修改判断旧密码是否正确
+             */
             String oldPassword = req.getParameter("oldPassword");
             Admin admin = (Admin) req.getSession().getAttribute("admin");
             boolean booleanPassword = new AdminServiceImpl().passwordComparison(admin.getUserName(), oldPassword);
             resp.getWriter().write(booleanPassword + "");
         } else if ("homepageDataAcquisition".equals(tag)) {
+            /**
+             * 主页图标的数据由此发送
+             */
             homepageDataAcquisition(resp);
         } else if ("studentNoSelect".equals(tag)) {
+            /**
+             * 学生的学号查询
+             */
             int studentNo = Integer.parseInt(req.getParameter("studentNoSelect"));
             boolean studentNoSelect = new AdminServiceImpl().selectStudent(studentNo);
             resp.getWriter().write(studentNoSelect + "");
         } else if ("loadGradesAndCourses".equals(tag)) {
+            /**
+             * 加载成绩和课程信息
+             */
             int studentNo = Integer.parseInt(req.getParameter("studentNoSelect"));
             String studentName = new AdminServiceImpl().getStudentNameUsingStudentNumber(studentNo);
             List<Echarts> loadGradesAndCourses = new AdminServiceImpl().getCourseNameAndGrade(studentNo);
@@ -137,21 +185,33 @@ public class AdminServlet extends HttpServlet {
         if (req.getParameter("tag") != null) {
             tag = req.getParameter("tag");
         }
+
         if ("show".equals(tag)) {
             showIndex(req, resp);
         } else if ("updateTable".equals(tag)) {
+            /**
+             * 学生信息更新
+             */
             updateStudent(req, resp);
         } else if ("addStudent".equals(tag)) {
+            /**
+             * 添加新的学生
+             */
             addStudent(req, resp);
         } else if ("updateAdminPassword".equals(tag)) {
+            /**
+             * 更新管理员密码
+             */
             updateAdminPassword(req, resp);
         } else if ("updateStudentResult".equals(tag)) {
+            /**
+             * 学生成绩修改
+             */
             updateStudentResult(req, resp);
 
         }
 
     }
-
 
     /**
      * 学生成绩修改
@@ -217,7 +277,6 @@ public class AdminServlet extends HttpServlet {
         resp.sendRedirect("login.html");
     }
 
-
     /**
      * 读写储存在cookie里的数值
      *
@@ -244,7 +303,6 @@ public class AdminServlet extends HttpServlet {
         String jo = jsonObject.toJSONString();
         resp.getWriter().println(jo);
     }
-
 
     /**
      * 删除学生
@@ -298,7 +356,6 @@ public class AdminServlet extends HttpServlet {
         String js = jsonObject.toJSONString();
         resp.getWriter().write(js);
     }
-
 
     /**
      * 添加学生
@@ -386,7 +443,6 @@ public class AdminServlet extends HttpServlet {
         resp.getWriter().write(studentJsonObject);
     }
 
-
     /**
      * 获取分页属性
      *
@@ -434,7 +490,6 @@ public class AdminServlet extends HttpServlet {
         resp.getWriter().write(student);
     }
 
-
     /**
      * 学生信息更新方法
      *
@@ -469,7 +524,6 @@ public class AdminServlet extends HttpServlet {
         adminServiceImpl.updateStudent(student);
         showTable(req, resp);
     }
-
 
     /**
      * 显示Index页面 复用性高 抽离
@@ -510,7 +564,6 @@ public class AdminServlet extends HttpServlet {
 //        resp.sendRedirect("user/charts.html");
     }
 
-
     /**
      * 聚合查询页
      *
@@ -523,7 +576,6 @@ public class AdminServlet extends HttpServlet {
         req.getRequestDispatcher("user/cards.html").forward(req, resp);
 //        resp.sendRedirect("user/cards.html");
     }
-
 
     /**
      * 学生信息操作页

@@ -113,9 +113,9 @@ public class ResponseServlet extends HttpServlet {
         String cord = request.getParameter("userImgCode");
         String checkcode = request.getSession().getAttribute("checkcode") + "";
         if (checkcode.equals(cord)) {
-            response.getWriter().write(true+"");
+            response.getWriter().write(true + "");
         } else {
-            response.getWriter().write(false+"");
+            response.getWriter().write(false + "");
         }
     }
 }
