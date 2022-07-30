@@ -37,40 +37,85 @@ public class AdminServlet extends HttpServlet {
             tag = req.getParameter("tag");
         }
         if ("show".equals(tag)) {
+            /**
+             * 显示Index页面
+             */
             showIndex(req, resp);
         } else if ("cookie".equals(tag)) {
+            /**
+             * 读写储存在cookie里的数值
+             */
             getCookie(req, resp);
         } else if ("tables".equals(tag)) {
+            /**
+             * 显示tables页面
+             */
             showTable(req, resp);
         } else if ("charts".equals(tag)) {
+            /**
+             * 显示数据页
+             */
             showCharts(req, resp);
         } else if ("showTables".equals(tag)) {
+            /**
+             * 获取分页属性
+             */
             getPagination(req, resp);
         } else if ("logout".equals(tag)) {
+            /**
+             * 退出程序
+             */
             logout(req, resp);
         } else if ("cards".equals(tag)) {
+            /**
+             * 聚合查询页(预留页面 无任何功能)
+             */
             showCards(req, resp);
         } else if ("tableAdd".equals(tag)) {
+            /**
+             * 学生信息操作页
+             */
             showButtons(req, resp);
         } else if ("tablesEdit".equals(tag)) {
+            /**
+             * 点击学号时获取学号
+             */
             if (req.getParameter("studentNo") != null) {
                 studentNoEdit = Integer.parseInt(req.getParameter("studentNo"));
             }
             showTablesEdit(req, resp);
         } else if ("tablesEdits".equals(tag)) {
+            /**
+             * 表信息修改
+             */
             tablesEdits(resp);
         } else if ("selectGradeAndSex".equals(tag)) {
+            /**
+             * 获取年级与性别
+             */
             selectGradeAndSex(resp);
         } else if ("deleteStudent".equals(tag)) {
+            /**
+             * 删除学生
+             */
             deleteStudent(req, resp);
         } else if ("passwordSelect".equals(tag)) {
+            /**
+             * 判断新密码是否与旧密码相等
+             */
             String oldPassword = req.getParameter("oldPassword");
             Admin admin = (Admin) req.getSession().getAttribute("admin");
             boolean booleanPassword = new AdminServiceImpl().passwordComparison(admin.getUserName(), oldPassword);
             resp.getWriter().write(booleanPassword + "");
         } else if ("homepageDataAcquisition".equals(tag)) {
+            /**
+             * 首页图形数据加载
+             */
             homepageDataAcquisition(resp);
         } else if ("studentNoSelect".equals(tag)) {
+            /**
+             * 学生学号查询
+             */
             int studentNo = Integer.parseInt(req.getParameter("studentNoSelect"));
             boolean studentNoSelect = new AdminServiceImpl().selectStudent(studentNo);
             resp.getWriter().write(studentNoSelect + "");
@@ -80,6 +125,9 @@ public class AdminServlet extends HttpServlet {
              */
             loadGradesAndCourses(req, resp);
         } else if ("fuzzyQuery".equals(tag)) {
+            /**
+             * 根据学生姓名模糊查询数据
+             */
             fuzzyQuery(req, resp);
         }
     }
@@ -92,14 +140,29 @@ public class AdminServlet extends HttpServlet {
             tag = req.getParameter("tag");
         }
         if ("show".equals(tag)) {
+            /**
+             * 显示首页
+             */
             showIndex(req, resp);
         } else if ("updateTable".equals(tag)) {
+            /**
+             * 学生信息更新
+             */
             updateStudent(req, resp);
         } else if ("addStudent".equals(tag)) {
+            /**
+             * 添加学生
+             */
             addStudent(req, resp);
         } else if ("updateAdminPassword".equals(tag)) {
+            /**
+             * 更新管理员密码
+             */
             updateAdminPassword(req, resp);
         } else if ("updateStudentResult".equals(tag)) {
+            /**
+             * 学生成绩修改
+             */
             updateStudentResult(req, resp);
         }
 
@@ -174,7 +237,7 @@ public class AdminServlet extends HttpServlet {
 
     private void fuzzyQuery(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         /**
-         * 根据学生姓名进行模糊查询数据
+         * 根据学生姓名模糊查询数据
          */
         String studentName = req.getParameter("studentName");
         if (studentName != null && studentName != "") {
