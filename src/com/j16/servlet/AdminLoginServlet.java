@@ -28,7 +28,7 @@ public class AdminLoginServlet extends HttpServlet {
         if (req.getParameter("tag") != null) {
             tag = req.getParameter("tag");
         }
-        System.out.println(tag);
+
         if ("select".equals(tag)) {
             String user = req.getParameter("userName");
             boolean bool = adminServiceImpl.selectAdmin(user);
@@ -101,20 +101,23 @@ public class AdminLoginServlet extends HttpServlet {
         AdminServiceImpl adminServiceImpl = new AdminServiceImpl();
         String inputUsername = req.getParameter("inputUsername");
         String inputPassword = req.getParameter("inputPassword");
+        String inputPasswordMd5 = Md5Util.mD5(inputPassword);
         if (isNull(inputUsername) || isNull(inputPassword) || "".equals(inputUsername) || "".equals(inputPassword)) {
             resp.sendRedirect("login.html");
         } else {
-            Admin admin = adminServiceImpl.getAdmin(inputUsername, inputPassword);
+            Admin admin = adminServiceImpl.getAdmin(inputUsername, inputPasswordMd5);
             if (!isNull(admin)) {
                 /**
                  * 登录成功后保存cookie
                  */
-                Cookie user = new Cookie("user", admin.getUserName());
-                Cookie pwd = new Cookie("pwd", admin.getUserPwd());
-                user.setMaxAge(30 * 30 * 24 * 7);
-                pwd.setMaxAge(30 * 30 * 24 * 7);
-                resp.addCookie(user);
-                resp.addCookie(pwd);
+                if (req.getParameter("customChecks").equals("1")) {
+                    Cookie user = new Cookie("user", admin.getUserName());
+                    Cookie pwd = new Cookie("pwd", admin.getUserPwd());
+                    user.setMaxAge(30 * 30 * 24 * 7);
+                    pwd.setMaxAge(30 * 30 * 24 * 7);
+                    resp.addCookie(user);
+                    resp.addCookie(pwd);
+                }
 
                 /**
                  * 注册成功后存储属性
