@@ -61,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Admin getAdmin(String userName, String userPwd) {
         Admin admin = adminDaoImpl.getAdmin(userName);
-        if (isNull(admin)) {
+        if (isNull(admin.getUserName())) {
             return null;
         } else {
             if (admin.getUserPwd().equals(userPwd)) {

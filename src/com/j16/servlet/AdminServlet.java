@@ -105,7 +105,7 @@ public class AdminServlet extends HttpServlet {
              */
             String oldPassword = req.getParameter("oldPassword");
             Admin admin = (Admin) req.getSession().getAttribute("admin");
-            boolean booleanPassword = new AdminServiceImpl().passwordComparison(admin.getUserName(), oldPassword);
+            boolean booleanPassword = new AdminServiceImpl().passwordComparison(admin.getUserName(), Md5Util.mD5(oldPassword));
             resp.getWriter().write(booleanPassword + "");
         } else if ("homepageDataAcquisition".equals(tag)) {
             /**
@@ -129,6 +129,11 @@ public class AdminServlet extends HttpServlet {
              * 根据学生姓名模糊查询数据
              */
             fuzzyQuery(req, resp);
+        } else if ("updateAdminPassword".equals(tag)) {
+            /**
+             * 更新管理员密码
+             */
+            updateAdminPassword(req, resp);
         }
     }
 
@@ -154,12 +159,7 @@ public class AdminServlet extends HttpServlet {
              * 添加学生
              */
             addStudent(req, resp);
-        } else if ("updateAdminPassword".equals(tag)) {
-            /**
-             * 更新管理员密码
-             */
-            updateAdminPassword(req, resp);
-        } else if ("updateStudentResult".equals(tag)) {
+        }else if ("updateStudentResult".equals(tag)) {
             /**
              * 学生成绩修改
              */
@@ -287,10 +287,10 @@ public class AdminServlet extends HttpServlet {
     private void updateAdminPassword(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Admin admin = (Admin) req.getSession().getAttribute("admin");
         AdminServiceImpl adminServiceImpl = new AdminServiceImpl();
-        String oldPassword = req.getParameter("password");
+        String oldPassword = req.getParameter("oldPassword");
         String password = req.getParameter("newPassword");
-        if (adminServiceImpl.passwordComparison(admin.getUserName(), oldPassword)) {
-            adminServiceImpl.updateAdminPassword(admin.getUserName(), password);
+        if (adminServiceImpl.passwordComparison(admin.getUserName(), Md5Util.mD5(oldPassword))) {
+            adminServiceImpl.updateAdminPassword(admin.getUserName(), Md5Util.mD5(password));
             logout(req, resp);
         } else {
             showButtons(req, resp);

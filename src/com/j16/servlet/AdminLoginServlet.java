@@ -110,7 +110,7 @@ public class AdminLoginServlet extends HttpServlet {
                 /**
                  * 登录成功后保存cookie
                  */
-                if (req.getParameter("customChecks").equals("1")) {
+                if ("1".equals(req.getParameter("customChecks"))) {
                     Cookie user = new Cookie("user", admin.getUserName());
                     Cookie pwd = new Cookie("pwd", admin.getUserPwd());
                     user.setMaxAge(30 * 30 * 24 * 7);

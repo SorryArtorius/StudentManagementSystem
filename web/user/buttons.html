@@ -695,11 +695,11 @@
                                     </table>
                                 </form>
                                 <a class="btn btn-primary btn-icon-split btn-lg" href="#"
-                                   id="buttonPassword" onclick="addFormTablePwd.submit()">
+                                   id="buttonPassword" onclick="updateAdminPassword()">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-flag"></i>
                                         </span>
-                                    <span class="text">修改密码</span>
+                                    <span class="text" onclick="updateAdminPassword()">修改密码</span>
                                 </a>
                             </div>
                         </div>
@@ -814,6 +814,12 @@
                     unlockNewPassword();
                 }
             });
+    }
+
+    function updateAdminPassword() {
+        var oldPassword = $("#oldPassword").val();
+        var pwds = $("#exampleRepeatPassword").val();
+        $.get("adminServlet", {tag: "updateAdminPassword", oldPassword: oldPassword,newPassword:pwds});
     }
 
     function unlockNewPassword() {
